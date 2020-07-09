@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
@@ -6,8 +7,8 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 
 import InputAdornment from '@material-ui/core/InputAdornment';
-
-
+import AuthAPI from '../DAL/Auth'
+import dataAPI from '../DAL/Logger'
 const styles = {
     container: {
         display: 'flex',
@@ -26,9 +27,11 @@ const styles = {
 
 function Logger(props){
     const classes = makeStyles(styles);
+    let weightRef = useRef();
+    let repsRef = useRef();
 
-    let handleClick = function(e){
-        alert("hi")
+    let logWorkout = function(e){
+        dataAPI.postWorkoutInfo(props.selectedExName.current.value,weightRef.current.value,repsRef.current.value)
     }
 
     return(
@@ -38,8 +41,9 @@ function Logger(props){
                 label="Weight"
                 id="outlined-start-adornment"
                 type="number"
+                inputRef={weightRef}
                 InputProps={{
-                    
+                    style : {backgroundColor:"aliceblue"},
                     startAdornment: <InputAdornment position="start">lbs</InputAdornment>,
                 }}
                 variant="outlined"
@@ -48,13 +52,15 @@ function Logger(props){
                 label="# of Reps"
                 id="outlined-start-adornment"
                 type="number"
+                inputRef = {repsRef}
                 InputProps={{
-                    startAdornment: <InputAdornment position="start"></InputAdornment>,
+                    style : {backgroundColor:"aliceblue"},
+                    startAdornment: <InputAdornment  position="start"></InputAdornment>,
                 }}
                 variant="outlined"
             />
             
-            <Button  variant="contained" color="primary">
+            <Button onClick={logWorkout}  variant="contained" color="primary">
                 Log
             </Button>
 

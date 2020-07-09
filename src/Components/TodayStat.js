@@ -22,18 +22,10 @@ const useStyles = makeStyles({
   container: {
     maxHeight: "30vh",
     paddingTop: "1vh",
+    backgroundColor: 'aliceblue'
   },
 });
 
-
-
-const rows = [
-  createData(8, new Date().toLocaleTimeString(), 6.0, 24),
-  createData(9, new Date().toLocaleTimeString(), 9.0, 37),
-  createData(10, new Date().toLocaleTimeString(), 16.0, 24),
-  createData(11, new Date().toLocaleTimeString(), 3.7, 67),
-  createData(12, new Date().toLocaleTimeString(), 16.0, 49),
-]
 
 function TodayStat(props){
 
@@ -42,8 +34,8 @@ function TodayStat(props){
     return(
       <Container>
         <Typography className={classes.topOffset}  align="center">Today's Stats</Typography>
-        <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table">
+        <TableContainer className={classes.container} component={Paper}>
+          <Table  aria-label="sticky table">
             <TableHead>
               <TableRow>
                 <TableCell align="center">Time</TableCell>
@@ -52,11 +44,11 @@ function TodayStat(props){
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell align="center">{row.calories}</TableCell>
-                  <TableCell align="center">{row.name}</TableCell>
-                  <TableCell align="center">{row.name}</TableCell>
+              {props.todayRows.map((row) => (
+                <TableRow>
+                  <TableCell align="center">{new Date(row.date).toLocaleTimeString()}</TableCell>
+                  <TableCell align="center">{row.weight}</TableCell>
+                  <TableCell align="center">{row.reps}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

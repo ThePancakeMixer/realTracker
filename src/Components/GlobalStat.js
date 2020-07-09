@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer'
 
 
@@ -19,6 +19,7 @@ const useStyles = makeStyles({
   container: {
     maxHeight: "30vh",
     paddingTop: "1vh",
+    backgroundColor: 'aliceblue'
   },
 });
 
@@ -44,21 +45,21 @@ function GlobalStat(props){
     return(
         <Container>
             <Typography className={classes.topOffset}  align="center">All-Time Stats</Typography>
-            <TableContainer className={classes.container}>
-              <Table stickyHeader   aria-label="sticky table">
+            <TableContainer className={classes.container} component={Paper}>
+              <Table    aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center" size="small">Period</TableCell>
+                    <TableCell align="center" >Period</TableCell>
                     <TableCell align="center">Weight</TableCell>
                     <TableCell align="center">Reps</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
-                    <TableRow key={row.name}>
+                  {props.globalRows.map((row) => (
+                    <TableRow>
                       <TableCell align="center">{row.name}</TableCell>
-                      <TableCell align="center" size="small">{row.calories}</TableCell>
-                      <TableCell align="center">{row.fat}</TableCell>
+                      <TableCell align="center">{row.weight}</TableCell>
+                      <TableCell align="center">{row.reps}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
